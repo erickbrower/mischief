@@ -1,0 +1,14 @@
+---
+development: &default
+  db:
+    adapter: sqlite3
+    database: db/development.sqlite3
+  pagination:
+    default_per_page: 100
+    max_per_page: 1000
+
+test: 
+  <<: *default
+  db:
+    adapter: sqlite3
+    database: db/test.sqlite3

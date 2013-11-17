@@ -5,10 +5,12 @@ gem 'sinatra-contrib'
 gem 'rake'
 gem 'warden'
 gem 'sinatra-activerecord'
-gem 'activerecord-postgresql-adapter'
-gem 'pg'
+gem 'sqlite3'
 gem 'bcrypt-ruby'
 gem 'kaminari', require: 'kaminari/sinatra'
+
+#gem 'activerecord-postgresql-adapter'
+#gem 'pg'
 
 group :development do
   gem 'pry'
