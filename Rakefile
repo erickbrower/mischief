@@ -33,7 +33,10 @@ end
 namespace :generate do
   task :model => [:environment] do
     name = ENV['NAME'] 
-    puts 'Please provide the name with NAME=' and return unless name
+    unless name
+      puts 'Please provide the name with NAME=' 
+      return
+    end
     puts "Generating a migration for #{name}"
     ENV['NAME'] = "create_#{name.underscore}"
     Rake::Task['db:create_migration'].invoke
