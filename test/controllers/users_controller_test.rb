@@ -13,7 +13,7 @@ class UsersControllerTest < MiniTest::Unit::TestCase
 
   def test_paginate_users
     10.times { Factory::Users.make! }
-    get '/?per=5.json',{}, { 'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
+    get '/?per=5.json', {}, { 'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
     assert last_response.ok?
     user_data = JSON.parse last_response.body
     assert user_data.length == 5
@@ -40,15 +40,15 @@ class UsersControllerTest < MiniTest::Unit::TestCase
 
   def test_show_user
     existing_user = Factory::Users.make!
-    get "/#{existing_user.id}.json", {}, {'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
+    get "/#{existing_user.id}.json", {}, { 'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
     assert last_response.ok?
-    user_data = JSON.parse(last_response.body)
+    user_data = JSON.parse last_response.body
     assert user_data['email'] == existing_user.email
   end
 
   def test_delete_user
     existing_user = Factory::Users.make!
-    delete "/#{existing_user.id}.json", {}, {'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
+    delete "/#{existing_user.id}.json", {}, { 'AUTH_TOKEN' => @test_user.auth_tokens.first.value }
     assert last_response.ok?
     assert_raises ActiveRecord::RecordNotFound do
       User.find existing_user.id

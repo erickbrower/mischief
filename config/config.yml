@@ -6,6 +6,7 @@ development: &default
   pagination:
     default_per_page: 100
     max_per_page: 1000
+  auth_header_key: AUTH_TOKEN
 
 test: 
   <<: *default
