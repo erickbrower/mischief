@@ -30,21 +30,26 @@ task :server do |t|
   exec "RACK_ENV=#{ENV['RACK_ENV']} rackup"
 end
 
+Rake::TestTask.new do |t|
+  t.pattern = 'test/**/*_test.rb'
+end
+
 namespace :generate do
   task :model => [:environment] do
-    name = ENV['NAME'] 
-    unless name
-      puts 'Please provide the name with NAME=' 
+    unless ENV['NAME']
+      puts 'Please provide the model name with NAME=' 
       return
     end
+    name = ENV['NAME'].dup
     puts "Generating a migration for #{name}"
     ENV['NAME'] = "create_#{name.underscore}"
     Rake::Task['db:create_migration'].invoke
-    generate_model
+    ENV['NAME'] = name
+    generate_model name
   end
 
   task :resource => [:environment, 'generate:model'] do
-    generate_resource
+    generate_resource ENV['NAME']
   end
 
   def generate_resource(name)
@@ -95,8 +100,8 @@ namespace :generate do
         end
       end
     TPL
-    rsrc_file = "#{File.expand_path('../app/controllers', __FILE__)}/#{name.underscore}_controller.rb"
-    puts "Generating controller scaffold for #{name} model at #{cls_file}"
+    rsrc_file = "#{File.expand_path('../app/controllers', __FILE__)}/#{name.pluralize.underscore}_controller.rb"
+    puts "Generating controller scaffold for #{name} model at #{rsrc_file}"
     File.open(rsrc_file, 'w') { |f| f.write rsrc_template }
   end
 
@@ -111,8 +116,4 @@ namespace :generate do
     puts "Generating empty #{name} model at #{cls_file}"
     File.open(cls_file, 'w') { |f| f.write cls_template }
   end
-end
-
-Rake::TestTask.new do |t|
-  t.pattern = 'test/**/*_test.rb'
 end
