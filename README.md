@@ -51,3 +51,9 @@ A simple bear can rest at ease.
 * [MiniTest](https://github.com/seattlerb/minitest) and [database_cleaner](https://github.com/bmabey/database_cleaner)
 * [Yard](http://yardoc.org/)
 * sinatra/json and sinatra/config_file from [sinatra-contrib](https://github.com/sinatra/sinatra-contrib)
+
+
+I work with Rails every day, but I'm still learning about all the great things Sinatra can do. This project is basically the result of trying to answer the question "But how would X work with Sinatra?", where X was ActiveRecord, then Warden and auth, then integration testing, etc. At the very least this project can provide some examples for how to go about those things. 
+
+Work in progress! Feedback is welcome!
+
