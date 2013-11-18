@@ -35,6 +35,7 @@ Rake::TestTask.new do |t|
 end
 
 namespace :generate do
+  desc 'Generate an empty model and migration'
   task :model => [:environment] do
     unless ENV['NAME']
       puts 'Please provide the model name with NAME=' 
@@ -48,6 +49,7 @@ namespace :generate do
     generate_model name
   end
 
+  desc 'Generate a model, migration, and scaffold controller.'
   task :resource => [:environment, 'generate:model'] do
     generate_resource ENV['NAME']
   end
