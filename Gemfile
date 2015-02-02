@@ -14,7 +14,7 @@ gem 'kaminari', require: 'kaminari/sinatra'
 
 group :development do
   gem 'pry'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'racksh'
   gem 'yard'
   gem 'yard-sinatra'
